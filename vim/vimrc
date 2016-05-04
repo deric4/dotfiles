@@ -1,0 +1,219 @@
+" Use Vim settings rather than Vi settings
+set nocompatible
+
+" Improves smoothness of redrawing when there are multiple windows and the
+" terminal doesn't support a scrolling region. 
+set ttyfast
+
+" Screen will not be redrawn while executing macros, registers, and other
+" commands that have not been typed. 
+set lazyredraw
+
+" Force 256 colors on the terminal. Needed for solarized theme
+set t_Co=256
+colorscheme solarized
+
+" Required for vundle
+filetype off
+filetype plugin indent on
+
+" ==== General Configuration ====
+let mapleader=","
+
+syntax enable									"syntax highlighting
+set background=dark
+set completeopt-=preview
+set backspace=indent,eol,start
+set incsearch									"seacrch while you type
+set hlsearch									"highlight searches
+set smartindent								"smart indent
+set tabstop=3									"number of spaces for tab
+set shiftwidth=3								"number of spaces auto indent
+set softtabstop=3
+set expandtab
+set ignorecase									"Case insensitive search
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
+set cursorline 								"show cursor line
+set cursorcolumn                       "show cursor column
+set mouse=""
+set number
+set scrolloff=3
+
+hi CursorLine guibg=Grey40 gui=bold
+hi CursorColumn guibg=Grey40
+
+
+" reselectp pastecape in insert mod content
+noremap gV `[v`]
+
+
+" ==== Layout Balancing ====
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
+
+
+
+
+" ==== Cursor Movement ====
+" Mappings between splits.
+map <C-J> <C-W>j<C-W>
+map <C-K> <C-W>k<C-W>
+map <C-L> <C-W>l<C-W>
+map <C-H> <C-W>h<C-W>
+
+" Don't skip wrapped lines when moving
+nnoremap j gj
+nnoremap k gk
+
+inoremap jk <Esc>
+
+
+
+" ==== Buffer Management ====
+" Clear the search buffer when hitting return
+nnoremap <cr> :nohlsearch<cr>
+
+" Cycle buffers
+:nnoremap <Tab> :bnext<CR>
+:nnoremap <S-Tab> :bprevious<CR>
+
+
+
+
+" ==== VUNDLE ====
+"set the runtime path to include the Vudle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
+"alternatively, pass a path where Vundle should install Bundles
+"call vundle#begin('~/some/path/here')
+
+
+Plugin 'gmarik/Vundle.vim'
+
+" look up dash documentation 
+Plugin  'rizzatti/dash.vim'
+
+
+" ====  ELIXIR ====
+   " elixir syntax highlighting 
+   Plugin 'elixir-lang/vim-elixir'
+
+   "run mix tests from vim
+   map <leader><space> :!mix test --trace<CR>
+
+" ==== ANSIBLE ====
+   Plugin 'pearofducks/ansible-vim'
+
+
+"Plugin 'wincent/command-t'
+"map <leader>t :CommandT<CR>
+"let g:CommandTMaxFiles=20000
+"let g:CommandTFileScanner='find'
+
+" ==== UI Plugins ====
+   "Plugin 'bling/vim-bufferline'
+
+   " UI statusbar niceties
+   Plugin 'bling/vim-airline'       
+   Plugin 'vim-airline/vim-airline-themes'
+     set laststatus=2               " enable airline even if no splits
+     let g:airline_theme='luna'
+     let g:airline_powerline_fonts=1
+     let g:airline_enable_branch=1
+     let g:airline_enable_syntastic=1
+     let g:airline_left_sep = ''
+     let g:airline_right_sep = ''
+     let g:airline_linecolumn_prefix = '␊ '
+     let g:airline_linecolumn_prefix = '␤ '
+     let g:airline_linecolumn_prefix = '¶ '
+     let g:airline_branch_prefix = '⎇ '
+     let g:airline_paste_symbol = 'ρ'
+     let g:airline_paste_symbol = 'Þ'
+     let g:airline_paste_symbol = '∥'
+     let g:airline#extensions#tabline#enabled = 1
+
+   " Syntax Highligting
+   Plugin	'scrooloose/syntastic'"
+
+
+" ==== NERDTree ====
+    Plugin 'scrooloose/nerdtree'
+
+    " Open nerdtree when opening vim
+    "au VimEnter *  NERDTree
+
+    " Move cursor to the buffer right of nerdtree when its opened
+    "au VimEnter * wincmd p
+    
+    " If closing a buffer while nerdtree is open and nerdtree is the only
+    " buffer left, exit nerdtree. This prevents having to close 2 times.
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+    "Toggle NERDTree. If opening NerdTree place cursor in main window.
+    nnoremap <leader>g :NERDTreeToggle \| :wincmd p<CR>
+
+   " Shows git status menus in nerdtree
+   Plugin 'Xuyuanp/nerdtree-git-plugin'
+
+" A todo list creator. `,i` insert todo box. `,x` mark box complete.
+Plugin 'vitalk/vim-simple-todo'
+
+
+" A jade templating plugin
+Plugin 'digitaltoad/vim-jade'
+
+"AutoComplete + Snippets
+Plugin 	'Valloric/YouCompleteMe'
+
+" Tab Completion
+Plugin	'ervandew/supertab'
+
+" Table Creation
+Plugin   'dhruvasagar/vim-table-mode'
+   let g:table_mode_corner="|"
+   nnoremap <leader>tm :TableModeToggle<CR>
+
+call vundle#end()								"REQUIRED
+
+
+
+
+" ==== MISCELLANEOUS ====
+
+"set markdown syntax for .md files
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
+"set html syntax for handlebars files
+au BufNewFile,BufRead *.handlebars set filetype=html
+au BufNewFile,BufRead *.jade filetype=html
+
+"set json syntax for AWS template
+au BufNewFile,BufRead *.template set filetype=json
+
+"set sshconfig syntax for ssh.cfg used for ansible
+au BufNewFile,BufRead ssh.cfg set filetype=sshconfig
+
+"Toggle between Fixed and Relative line numbers Ctrl-n"
+"Disabled relative line numbers to try and decrease lag
+nnoremap <C-n> :call NumberToggle()<cr>
+    function! NumberToggle()
+      if(&number == 1)
+"     if(&relativenumber == 1)
+"          set norelativenumber
+          set nonumber
+      else
+"          set relativenumber
+          set number
+      endif
+    endfunc
+
+" Open files where we left off
+if has("autocmd")
+      au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+          \| exe "normal! g'\"" | endif
+endif
+
