@@ -45,6 +45,9 @@ Plugin 'elixir-lang/vim-elixir'
 " ==== ANSIBLE ====
 Plugin 'pearofducks/ansible-vim'
 
+" ==== PYTHONG ====
+Plugin 'klen/python-mode'
+
 
 "Plugin 'wincent/command-t'
 "map <leader>t :CommandT<CR>
