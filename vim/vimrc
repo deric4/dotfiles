@@ -15,73 +15,10 @@ colorscheme solarized
 
 " Required for vundle
 filetype off
-filetype plugin indent on
 
 " ==== General Configuration ====
+
 let mapleader=","
-
-syntax enable									"syntax highlighting
-set background=dark
-set completeopt-=preview
-set backspace=indent,eol,start
-set incsearch									"seacrch while you type
-set hlsearch									"highlight searches
-set smartindent								"smart indent
-set tabstop=3									"number of spaces for tab
-set shiftwidth=3								"number of spaces auto indent
-set softtabstop=3
-set expandtab
-set ignorecase									"Case insensitive search
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
-set cursorline 								"show cursor line
-set cursorcolumn                       "show cursor column
-set mouse=""
-set number
-set scrolloff=3
-
-hi CursorLine guibg=Grey40 gui=bold
-hi CursorColumn guibg=Grey40
-
-
-" reselectp pastecape in insert mod content
-noremap gV `[v`]
-
-
-" ==== Layout Balancing ====
-" automatically rebalance windows on vim resize
-autocmd VimResized * :wincmd =
-
-nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>= :wincmd =<cr>
-
-
-
-
-" ==== Cursor Movement ====
-" Mappings between splits.
-map <C-J> <C-W>j<C-W>
-map <C-K> <C-W>k<C-W>
-map <C-L> <C-W>l<C-W>
-map <C-H> <C-W>h<C-W>
-
-" Don't skip wrapped lines when moving
-nnoremap j gj
-nnoremap k gk
-
-inoremap jk <Esc>
-
-
-
-" ==== Buffer Management ====
-" Clear the search buffer when hitting return
-nnoremap <cr> :nohlsearch<cr>
-
-" Cycle buffers
-:nnoremap <Tab> :bnext<CR>
-:nnoremap <S-Tab> :bprevious<CR>
-
-
 
 
 " ==== VUNDLE ====
@@ -100,13 +37,13 @@ Plugin  'rizzatti/dash.vim'
 
 " ====  ELIXIR ====
    " elixir syntax highlighting 
-   Plugin 'elixir-lang/vim-elixir'
+Plugin 'elixir-lang/vim-elixir'
 
    "run mix tests from vim
    map <leader><space> :!mix test --trace<CR>
 
 " ==== ANSIBLE ====
-   Plugin 'pearofducks/ansible-vim'
+Plugin 'pearofducks/ansible-vim'
 
 
 "Plugin 'wincent/command-t'
@@ -178,7 +115,70 @@ Plugin   'dhruvasagar/vim-table-mode'
    nnoremap <leader>tm :TableModeToggle<CR>
 
 call vundle#end()								"REQUIRED
+filetype plugin indent on
 
+
+syntax enable									"syntax highlighting
+set background=dark
+set completeopt-=preview
+set backspace=indent,eol,start
+set incsearch									"seacrch while you type
+set hlsearch									"highlight searches
+set smartindent								"smart indent
+set tabstop=3									"number of spaces for tab
+set shiftwidth=3								"number of spaces auto indent
+set softtabstop=3
+set expandtab
+set ignorecase									"Case insensitive search
+set wildmode=list:longest,list:full
+set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
+set cursorline 								"show cursor line
+set cursorcolumn                       "show cursor column
+set mouse=""
+set number
+set scrolloff=3
+set tw=80
+
+hi CursorLine guibg=Grey40 gui=bold
+hi CursorColumn guibg=Grey40
+
+
+" reselectp pastecape in insert mod content
+noremap gV `[v`]
+
+
+" ==== Layout Balancing ====
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
+
+
+
+
+" ==== Cursor Movement ====
+" Mappings between splits.
+map <C-J> <C-W>j<C-W>
+map <C-K> <C-W>k<C-W>
+map <C-L> <C-W>l<C-W>
+map <C-H> <C-W>h<C-W>
+
+" Don't skip wrapped lines when moving
+nnoremap j gj
+nnoremap k gk
+
+inoremap jk <Esc>
+
+
+
+" ==== Buffer Management ====
+" Clear the search buffer when hitting return
+nnoremap <cr> :nohlsearch<cr>
+
+" Cycle buffers
+:nnoremap <Tab> :bnext<CR>
+:nnoremap <S-Tab> :bprevious<CR>
 
 
 
@@ -190,6 +190,7 @@ au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 "set html syntax for handlebars files
 au BufNewFile,BufRead *.handlebars set filetype=html
 au BufNewFile,BufRead *.jade filetype=html
+au BufNewFile,BufRead *.ftl  set filetype=html
 
 "set json syntax for AWS template
 au BufNewFile,BufRead *.template set filetype=json
