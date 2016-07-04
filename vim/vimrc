@@ -45,8 +45,15 @@ Plugin 'elixir-lang/vim-elixir'
 " ==== ANSIBLE ====
 Plugin 'pearofducks/ansible-vim'
 
-" ==== PYTHONG ====
+" ==== PYTHON ====
 Plugin 'klen/python-mode'
+   "Trim unused whitespaces on save
+   let g:pymode_trim_whitespaces = 1
+   let g:pymode_folding = 0
+   let g:pymode_rope_completion = 0
+
+" ==== DOCKER ====
+Plugin 'ekalinin/Dockerfile.vim'
 
 
 "Plugin 'wincent/command-t'
@@ -108,9 +115,19 @@ Plugin 'digitaltoad/vim-jade'
 
 "AutoComplete + Snippets
 Plugin 	'Valloric/YouCompleteMe'
+   let g:ycm_key_list_select_completion = ['<C-n>']
+   let g:ycm_key_list_previous_completion = ['<C-p>']
 
+
+" UltiSnips
+Plugin 'Sirver/ultisnips'
+   let g:UltiSnipsExpandTrigger = "<tab>"
+   let g:UltiSnipsJumpForwardTrigger = "<tab>"
+   let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+   let g:UltiSnipsSnippetsDir = "~/.vim/bundle/ultisnips/UltiSnips"
 " Tab Completion
 Plugin	'ervandew/supertab'
+   let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " Table Creation
 Plugin   'dhruvasagar/vim-table-mode'
