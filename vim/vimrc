@@ -51,6 +51,7 @@ Plugin 'klen/python-mode'
    let g:pymode_trim_whitespaces = 1
    let g:pymode_folding = 0
    let g:pymode_rope_completion = 0
+   let g:pymode_rope = 0
 
 " ==== DOCKER ====
 Plugin 'ekalinin/Dockerfile.vim'
