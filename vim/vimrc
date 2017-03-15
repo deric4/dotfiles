@@ -34,6 +34,7 @@ Plugin 'gmarik/Vundle.vim'
 " look up dash documentation 
 Plugin  'rizzatti/dash.vim'
 
+"Plugin 'plasticboy/vim-markdown'
 
 " ====  ELIXIR ====
    " elixir syntax highlighting 
@@ -85,8 +86,16 @@ Plugin 'ekalinin/Dockerfile.vim'
      let g:airline#extensions#tabline#enabled = 1
 
    " Syntax Highligting
-   Plugin	'scrooloose/syntastic'"
+   Plugin	'scrooloose/syntastic'
 
+" ==== Git ====
+
+   Plugin 'airblade/vim-gitgutter'
+   Plugin 'tpope/vim-fugitive'
+   
+
+" ==== Terraform ====
+   Plugin 'hashivim/vim-terraform'
 
 " ==== NERDTree ====
     Plugin 'scrooloose/nerdtree'
@@ -110,9 +119,11 @@ Plugin 'ekalinin/Dockerfile.vim'
 " A todo list creator. `,i` insert todo box. `,x` mark box complete.
 Plugin 'vitalk/vim-simple-todo'
 
-
 " A jade templating plugin
 Plugin 'digitaltoad/vim-jade'
+
+" Golang Plugin
+Plugin 'fatih/vim-go'
 
 "AutoComplete + Snippets
 Plugin 	'Valloric/YouCompleteMe'
@@ -146,9 +157,9 @@ set backspace=indent,eol,start
 set incsearch									"seacrch while you type
 set hlsearch									"highlight searches
 set smartindent								"smart indent
-set tabstop=3									"number of spaces for tab
-set shiftwidth=3								"number of spaces auto indent
-set softtabstop=3
+set tabstop=2									"number of spaces for tab
+set shiftwidth=2								"number of spaces auto indent
+set softtabstop=2
 set expandtab
 set ignorecase									"Case insensitive search
 set wildmode=list:longest,list:full
@@ -158,7 +169,7 @@ set cursorcolumn                       "show cursor column
 set mouse=""
 set number
 set scrolloff=3
-set tw=80
+"set tw=80
 
 hi CursorLine guibg=Grey40 gui=bold
 hi CursorColumn guibg=Grey40
@@ -207,6 +218,8 @@ nnoremap <cr> :nohlsearch<cr>
 
 "set markdown syntax for .md files
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+"set spell check on markdown files
+au BufRead,BufNewFile *.md setlocal spell
 
 "set html syntax for handlebars files
 au BufNewFile,BufRead *.handlebars set filetype=html
@@ -218,6 +231,10 @@ au BufNewFile,BufRead *.template set filetype=json
 
 "set sshconfig syntax for ssh.cfg used for ansible
 au BufNewFile,BufRead ssh.cfg set filetype=sshconfig
+
+"set groovy syntax for gradle files
+au BufNewFile,BufRead *.gradle set filetype=groovy
+
 
 "Toggle between Fixed and Relative line numbers Ctrl-n"
 "Disabled relative line numbers to try and decrease lag

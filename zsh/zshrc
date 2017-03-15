@@ -106,6 +106,7 @@ alias l='ls -la'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export GOPATH=$HOME/go
 
 #### Vim  key bindings
 
@@ -124,4 +125,13 @@ function dman() {
 }
 export PATH="/usr/local/sbin:$PATH"
 
+export PATH=$PATH:/usr/local/mysql
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$PATH/Users/deric/.sdkman/candidates
+
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/deric/.sdkman"
+[[ -s "/Users/deric/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/deric/.sdkman/bin/sdkman-init.sh"
