@@ -234,6 +234,7 @@ au BufNewFile,BufRead ssh.cfg set filetype=sshconfig
 
 "set groovy syntax for gradle files
 au BufNewFile,BufRead *.gradle set filetype=groovy
+au BufNewFile,BufRead Jenkinsfile set filetype=groovy
 
 
 "Toggle between Fixed and Relative line numbers Ctrl-n"
