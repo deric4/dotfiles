@@ -10,17 +10,15 @@ set ttyfast
 set lazyredraw
 
 " Force 256 colors on the terminal. Needed for solarized theme
-set t_Co=256
+syntax enable									"syntax highlighting
+set background=dark
 colorscheme solarized
 
 " Required for vundle
 filetype off
 
 " ==== General Configuration ====
-
 let mapleader=","
-
-
 " ==== VUNDLE ====
 "set the runtime path to include the Vudle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim/
@@ -150,8 +148,6 @@ call vundle#end()								"REQUIRED
 filetype plugin indent on
 
 
-syntax enable									"syntax highlighting
-set background=dark
 set completeopt-=preview
 set backspace=indent,eol,start
 set incsearch									"seacrch while you type
