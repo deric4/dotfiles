@@ -1,14 +1,15 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
-
+export TERM="xterm-256color"
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
-#ZSH_THEME="cypher"
+ZSH_THEME="cypher"
 #ZSH_THEME="cordial"
-ZSH_THEME="bira"
+#ZSH_THEME="bira"
+#ZSH_THEME="blinks"
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -68,12 +69,11 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git colored-man-pages)
 
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -100,7 +100,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias vim='/usr/local/bin/vim'
+#alias vim='/usr/local/bin/vim'
 alias l='ls -la'
 #alias tmux='tmux -2'
 # alias zshconfig="mate ~/.zshrc"
@@ -128,10 +128,15 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH=$PATH:/usr/local/mysql
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$PATH/Users/deric/.sdkman/candidates
+#export PATH=$PATH:/Users/deric/.sdkman/candidates
 
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
+# POWERLINE
+#. ${HOME}/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+export POWERLINE_CONFIG_COMMAND=${HOME}/Library/Python/3.6/bin/powerline-config
+#. ${HOME}/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/deric/.sdkman"
-[[ -s "/Users/deric/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/deric/.sdkman/bin/sdkman-init.sh"
+#export SDKMAN_DIR="/Users/deric/.sdkman"
+#[[ -s "/Users/deric/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/deric/.sdkman/bin/sdkman-init.sh"

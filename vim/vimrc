@@ -32,7 +32,6 @@ Plugin 'gmarik/Vundle.vim'
 " look up dash documentation 
 Plugin  'rizzatti/dash.vim'
 
-"Plugin 'plasticboy/vim-markdown'
 
 " ====  ELIXIR ====
    " elixir syntax highlighting 
@@ -41,8 +40,18 @@ Plugin 'elixir-lang/vim-elixir'
    "run mix tests from vim
    map <leader><space> :!mix test --trace<CR>
 
+" ==== Ctrlp   ====
+Plugin 'ctrlpvim/ctrlp.vim'
+  let g:ctrlp_map = '<leader>f'
+  let g:ctrlp_cmd = 'CtrlP'
 " ==== ANSIBLE ====
-Plugin 'pearofducks/ansible-vim'
+Plugin 'pearofducks/ansible-vim', {'pinned': 1} 
+   let g:ansible_unindent_after_newline = 1
+   let g:ansible_attribute_highlight = "ab"
+   let g:ansible_name_highlight = 'b'
+   let g:ansible_extra_keywords_highlight = 1
+   "let g:ansible_normal_keywords_highlight = 'Constant'
+   "let g:ansible_with_keywords_highlight = 'Constant'
 
 " ==== PYTHON ====
 Plugin 'klen/python-mode'
@@ -51,74 +60,48 @@ Plugin 'klen/python-mode'
    let g:pymode_folding = 0
    let g:pymode_rope_completion = 0
    let g:pymode_rope = 0
+   let g:pymode_lint_message = 0
+   let g:pymode_options_colorcolumn = 0
 
 " ==== DOCKER ====
 Plugin 'ekalinin/Dockerfile.vim'
 
-
-"Plugin 'wincent/command-t'
-"map <leader>t :CommandT<CR>
-"let g:CommandTMaxFiles=20000
-"let g:CommandTFileScanner='find'
-
-" ==== UI Plugins ====
-   "Plugin 'bling/vim-bufferline'
-
-   " UI statusbar niceties
-   Plugin 'bling/vim-airline'       
-   Plugin 'vim-airline/vim-airline-themes'
-     set laststatus=2               " enable airline even if no splits
-     let g:airline_theme='luna'
-     let g:airline_powerline_fonts=1
-     let g:airline_enable_branch=1
-     let g:airline_enable_syntastic=1
-     let g:airline_left_sep = ''
-     let g:airline_right_sep = ''
-     let g:airline_linecolumn_prefix = '␊ '
-     let g:airline_linecolumn_prefix = '␤ '
-     let g:airline_linecolumn_prefix = '¶ '
-     let g:airline_branch_prefix = '⎇ '
-     let g:airline_paste_symbol = 'ρ'
-     let g:airline_paste_symbol = 'Þ'
-     let g:airline_paste_symbol = '∥'
-     let g:airline#extensions#tabline#enabled = 1
-
-   " Syntax Highligting
-   Plugin	'scrooloose/syntastic'
+ " Syntax Highligting
+ " Plugin	'scrooloose/syntastic'
 
 " ==== Git ====
-
-   Plugin 'airblade/vim-gitgutter'
-   Plugin 'tpope/vim-fugitive'
+ Plugin 'airblade/vim-gitgutter'
+ Plugin 'tpope/vim-fugitive'
    
 
 " ==== Terraform ====
-   Plugin 'hashivim/vim-terraform'
+ Plugin 'hashivim/vim-terraform'
+   let g:terraform_fmt_on_save=1
+   let g:terraform_align=1
+   let g:terraform_fold_sections=1
+   let g:terraform_remap_spacebar=1
 
 " ==== NERDTree ====
-    Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 
-    " Open nerdtree when opening vim
-    "au VimEnter *  NERDTree
+  " Open nerdtree when opening vim
+  "au VimEnter *  NERDTree
 
-    " Move cursor to the buffer right of nerdtree when its opened
-    "au VimEnter * wincmd p
-    
-    " If closing a buffer while nerdtree is open and nerdtree is the only
-    " buffer left, exit nerdtree. This prevents having to close 2 times.
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  " Move cursor to the buffer right of nerdtree when its opened
+  "au VimEnter * wincmd p
+  
+  " If closing a buffer while nerdtree is open and nerdtree is the only
+  " buffer left, exit nerdtree. This prevents having to close 2 times.
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() || &buftype == 'quickfix') | q | endif
 
-    "Toggle NERDTree. If opening NerdTree place cursor in main window.
-    nnoremap <leader>g :NERDTreeToggle \| :wincmd p<CR>
+  "Toggle NERDTree. If opening NerdTree place cursor in main window.
+  nnoremap <leader>g :NERDTreeToggle \| :wincmd p<CR>
 
-   " Shows git status menus in nerdtree
-   Plugin 'Xuyuanp/nerdtree-git-plugin'
+ " Shows git status menus in nerdtree
+ Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " A todo list creator. `,i` insert todo box. `,x` mark box complete.
 Plugin 'vitalk/vim-simple-todo'
-
-" A jade templating plugin
-Plugin 'digitaltoad/vim-jade'
 
 " Golang Plugin
 Plugin 'fatih/vim-go'
@@ -127,7 +110,6 @@ Plugin 'fatih/vim-go'
 Plugin 	'Valloric/YouCompleteMe'
    let g:ycm_key_list_select_completion = ['<C-n>']
    let g:ycm_key_list_previous_completion = ['<C-p>']
-
 
 " UltiSnips
 Plugin 'Sirver/ultisnips'
@@ -139,15 +121,32 @@ Plugin 'Sirver/ultisnips'
 Plugin	'ervandew/supertab'
    let g:SuperTabDefaultCompletionType = '<C-n>'
 
+Plugin 'godlygeek/tabular'
+ let mapleader=','
+  if exists(":Tabularize")
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    vmap <Leader>a: :Tabularize /:\zs<CR>
+  endif
+
+Plugin 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled = 1
+
 " Table Creation
 Plugin   'dhruvasagar/vim-table-mode'
    let g:table_mode_corner="|"
    nnoremap <leader>tm :TableModeToggle<CR>
 
 call vundle#end()								"REQUIRED
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
+set laststatus=2
+set showtabline=2
+set noshowmode
+
 filetype plugin indent on
-
-
 set completeopt-=preview
 set backspace=indent,eol,start
 set incsearch									"seacrch while you type
@@ -160,15 +159,15 @@ set expandtab
 set ignorecase									"Case insensitive search
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
-set cursorline 								"show cursor line
-set cursorcolumn                       "show cursor column
+"set cursorline 								"show cursor line
+"set cursorcolumn                       "show cursor column
 set mouse=""
-set number
-set scrolloff=3
+set nonumber
+set scrolloff=20
 "set tw=80
 
-hi CursorLine guibg=Grey40 gui=bold
-hi CursorColumn guibg=Grey40
+"hi CursorLine guibg=Grey40 gui=bold
+"hi CursorColumn guibg=Grey40
 
 
 " reselectp pastecape in insert mod content
