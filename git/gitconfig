@@ -1,0 +1,36 @@
+[user]
+  email = deric.miguel@gmail.com
+[filter "terraform"]
+  smudge = git rm --cached `echo **/.teraform`
+[merge "ours"]
+  driver = true
+[merge]
+  tool = vimdiff2
+  conflictstyle = merge
+  ff = false
+[mergetool]
+  prompt = false
+  keepBackup = false
+[core]
+  pager = diff-so-fancy | less --tabs=4 -RFX
+  excludesfile = ~/.gitignore
+[color]
+  ui = true
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+[color "diff"]
+  meta = yellow
+  frag = magenta bold
+  commit = yellow bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+[diff-so-fancy]
+  useUnicodeRuler = false
+  markEmptyLines = false
+  stripLeadingSymbols = false
+~
+~
