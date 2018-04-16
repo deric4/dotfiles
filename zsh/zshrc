@@ -140,3 +140,6 @@ export POWERLINE_CONFIG_COMMAND=${HOME}/Library/Python/3.6/bin/powerline-config
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 #export SDKMAN_DIR="/Users/deric/.sdkman"
 #[[ -s "/Users/deric/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/deric/.sdkman/bin/sdkman-init.sh"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/Cellar/terraform/0.11.6/bin/terraform terraform
