@@ -116,10 +116,11 @@ Plugin 'Sirver/ultisnips'
    let g:UltiSnipsExpandTrigger = "<tab>"
    let g:UltiSnipsJumpForwardTrigger = "<tab>"
    let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-   let g:UltiSnipsSnippetsDir = "~/.vim/bundle/ultisnips/UltiSnips"
+   let g:UltiSnipsSnippetsDir = "~/.vim/snippets/ultisnips"
+
 " Tab Completion
 Plugin	'ervandew/supertab'
-   let g:SuperTabDefaultCompletionType = '<C-n>'
+    let g:SuperTabCrMapping = 0
 
 Plugin 'godlygeek/tabular'
  let mapleader=','
