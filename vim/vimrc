@@ -216,6 +216,7 @@ nnoremap <cr> :nohlsearch<cr>
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 "set spell check on markdown files
 au BufRead,BufNewFile *.md setlocal spell
+au BufRead,BufNewFile *.md setlocal tw=79
 
 "set html syntax for handlebars files
 au BufNewFile,BufRead *.handlebars set filetype=html
