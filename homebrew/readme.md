@@ -1,5 +1,6 @@
 # Homebrew
 
+This is way out of date: need to update
 Brew package install `cat brew-pacakges.md | xargs brew install`
 
 ### notes
