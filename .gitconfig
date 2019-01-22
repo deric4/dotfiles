@@ -6,6 +6,9 @@
 [includeIf "gitdir:~/Flux7/"]
 	path = .gitconfig.flux7
 
+[includeIf "gitdir:~/Flux7/Flux7/Clients/Sysco/"]
+  path = .gitconfig.sysco
+
 [gpg]
 	program = /usr/local/MacGPG2/bin/gpg
 [commit]
