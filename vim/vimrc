@@ -1,9 +1,13 @@
 " Use Vim settings rather than Vi settings
+if has('python3')
+  silent! python3 1
+endif
 set nocompatible
 
 " Improves smoothness of redrawing when there are multiple windows and the
 " terminal doesn't support a scrolling region. 
 set ttyfast
+set ttyscroll=3
 
 " Screen will not be redrawn while executing macros, registers, and other
 " commands that have not been typed. 
@@ -32,6 +36,11 @@ Plugin 'gmarik/Vundle.vim'
 " look up dash documentation 
 Plugin  'rizzatti/dash.vim'
 
+"
+Plugin 'PProvost/vim-ps1'
+Plugin 'scrooloose/vim-slumlord'
+" ==== PlantUML ===
+Plugin 'aklt/plantuml-syntax'
 
 " ====  ELIXIR ====
    " elixir syntax highlighting 
@@ -45,66 +54,140 @@ Plugin 'ctrlpvim/ctrlp.vim'
   let g:ctrlp_map = '<leader>f'
   let g:ctrlp_cmd = 'CtrlP'
 " ==== ANSIBLE ====
-Plugin 'pearofducks/ansible-vim', {'pinned': 1} 
+Plugin 'pearofducks/ansible-vim'
    let g:ansible_unindent_after_newline = 1
    let g:ansible_attribute_highlight = "ab"
    let g:ansible_name_highlight = 'b'
    let g:ansible_extra_keywords_highlight = 1
    "let g:ansible_normal_keywords_highlight = 'Constant'
    "let g:ansible_with_keywords_highlight = 'Constant'
+   "au BufRead,BufNewFile */playbooks/*.yml set filetype=yaml.ansible
+   "au BufRead,BufNewFile */tasks/*.yml set filetype=yaml.ansible
+  au BufNewFile,BufRead .yamllint set filetype=yaml
 
 " ==== PYTHON ====
-Plugin 'klen/python-mode'
-   "Trim unused whitespaces on save
-   let g:pymode_trim_whitespaces = 1
-   let g:pymode_folding = 0
-   let g:pymode_rope_completion = 0
-   let g:pymode_rope = 0
-   let g:pymode_lint_message = 0
-   let g:pymode_options_colorcolumn = 0
+"Plugin 'klen/python-mode'
+"  "Trim unused whitespaces on save
+"  let g:pymode_trim_whitespaces = 1
+"  let g:pymode_folding = 0
+"   let g:pymode_rope_completion = 0
+"   let g:pymode_rope = 0
+"   let g:pymode_lint_message = 0
+"   let g:pymode_options_colorcolumn = 0
+"   let g:pymode_python = 'python3'
+"   "silent! py3 pass
 
-" ==== DOCKER ====
-Plugin 'ekalinin/Dockerfile.vim'
+" ==== docker ====
+"plugin 'ekalinin/dockerfile.vim'
 
- " Syntax Highligting
- " Plugin	'scrooloose/syntastic'
+ " syntax highligting
+ " plugin	'scrooloose/syntastic'
 
-" ==== Git ====
- Plugin 'airblade/vim-gitgutter'
- Plugin 'tpope/vim-fugitive'
+" ==== git ====
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
    
 
-" ==== Terraform ====
+" ==== terraform ====
  Plugin 'hashivim/vim-terraform'
    let g:terraform_fmt_on_save=1
    let g:terraform_align=1
    let g:terraform_fold_sections=1
    let g:terraform_remap_spacebar=1
 
-" ==== NERDTree ====
+Plugin 'hashivim/vim-vaultproject'
+
+" ==== hcl ===
+Plugin 'fatih/vim-hclfmt'
+  let g:hcl_fmt_autosave = 1
+
+Plugin 'b4b4r07/vim-hcl'
+  augroup hcl
+  
+    autocmd BufNewFile,BufRead *.hcl set filetype=hcl
+
+
+" ==== nerdtree ====
 Plugin 'scrooloose/nerdtree'
 
-  " Open nerdtree when opening vim
-  "au VimEnter *  NERDTree
+  " open nerdtree when opening vim
+  "au vimenter *  nerdtree
 
-  " Move cursor to the buffer right of nerdtree when its opened
-  "au VimEnter * wincmd p
+  " move cursor to the buffer right of nerdtree when its opened
+  "au vimenter * wincmd p
   
-  " If closing a buffer while nerdtree is open and nerdtree is the only
-  " buffer left, exit nerdtree. This prevents having to close 2 times.
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() || &buftype == 'quickfix') | q | endif
+  " if closing a buffer while nerdtree is open and nerdtree is the only
+  " buffer left, exit nerdtree. this prevents having to close 2 times.
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:nerdtree") && b:nerdtree.istabtree() || &buftype == 'quickfix') | q | endif
 
-  "Toggle NERDTree. If opening NerdTree place cursor in main window.
-  nnoremap <leader>g :NERDTreeToggle \| :wincmd p<CR>
+  "toggle nerdtree. if opening nerdtree place cursor in main window.
+  nnoremap <leader>g :nerdtreetoggle \| :wincmd p<cr>
 
- " Shows git status menus in nerdtree
- Plugin 'Xuyuanp/nerdtree-git-plugin'
+ " shows git status menus in nerdtree
+ Plugin 'xuyuanp/nerdtree-git-plugin'
 
-" A todo list creator. `,i` insert todo box. `,x` mark box complete.
+" a todo list creator. `,i` insert todo box. `,x` mark box complete.
 Plugin 'vitalk/vim-simple-todo'
 
-" Golang Plugin
-Plugin 'fatih/vim-go'
+" gotests
+Plugin 'buoto/gotests-vim'
+
+" golang plugin
+Plugin 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  map <C-n> :cnext<CR>
+  map <C-m> :cprevious<CR>
+  nnoremap <leader>a :cclose<CR>
+
+  let g:go_fmt_command = "goimports"
+  let g:go_autodetect_gopath = 1
+  let g:go_list_type = "quickfix"
+
+  let g:go_highlight_types = 1
+  let g:go_highlight_fields = 1
+  let g:go_highlight_functions = 1
+  let g:go_highlight_function_arguments = 1
+  let g:go_highlight_function_calls = 1
+  let g:go_highlight_extra_types = 1
+  let g:go_highlight_generate_tags = 1
+  let g:go_highlight_operators = 1
+
+augroup go
+  autocmd!
+
+  " :GoTests (not vim-go)
+  autocmd FileType go nmap <leader>t  :GoTests<CR> 
+  
+  " :GoBuild and :GoTestCompile
+  autocmd FileType go nmap <leader>b  :<C-u>call <SID>build_go_files()<CR>
+
+  " :GoTest
+  "autocmd FileType go nmap <leader>t  <Plug>(go-test)
+
+  " :GoRun
+  autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
+  " :GoDoc
+  autocmd FileType go nmap <leader>d  <Plug>(go-doc)
+  " :GoDocBrowser
+  autocmd FileType go nmap <leader>f  <Plug>(go-doc-browser)
+
+  " :GoInfo
+  autocmd FileType go nmap <leader>i  <Plug>(go-info)
+
+  " :GoDef but opens in a vertical split
+  autocmd FileType go nmap <Leader>v <Plug>(go-def-vertical)
+  " :GoDef but opens in a horizontal split
+  autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
+
+  function! s:build_go_files()
+    let l:file = expand('%')
+    if l:file =~# '^\f\+_test\.go$'
+      call go#test#Test(0, 1)
+    elseif l:file =~# '^\f\+\.go$'
+      call go#cmd#Build(0)
+    endif
+  endfunction
+
 
 "AutoComplete + Snippets
 Plugin 	'Valloric/YouCompleteMe'
@@ -112,15 +195,16 @@ Plugin 	'Valloric/YouCompleteMe'
    let g:ycm_key_list_previous_completion = ['<C-p>']
 
 " UltiSnips
-Plugin 'Sirver/ultisnips'
-   let g:UltiSnipsExpandTrigger = "<tab>"
-   let g:UltiSnipsJumpForwardTrigger = "<tab>"
-   let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-   let g:UltiSnipsSnippetsDir = "~/.vim/snippets/ultisnips"
+"Plugin 'Sirver/ultisnips'
+"   let g:UltiSnipsExpandTrigger = "<tab>"
+"   let g:UltiSnipsJumpForwardTrigger = "<tab>"
+"   let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+"   let g:UltiSnipsSnippetsDir = "~/.vim/snippets/ultisnips"
 
 " Tab Completion
-Plugin	'ervandew/supertab'
-    let g:SuperTabCrMapping = 0
+"Plugin	'ervandew/supertab'
+"    let g:SuperTabCrMapping = 0
+
 
 Plugin 'godlygeek/tabular'
  let mapleader=','
@@ -140,36 +224,43 @@ Plugin   'dhruvasagar/vim-table-mode'
    nnoremap <leader>tm :TableModeToggle<CR>
 
 call vundle#end()								"REQUIRED
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
-set laststatus=2
+"python3 from powerline.vim import setup as powerline_setup python3 powerline_setup() python3 del powerline_setup set laststatus=2
 set showtabline=2
-set noshowmode
+"set noshowmode "mode shown with tmux/powerline
 
 filetype plugin indent on
 set completeopt-=preview
 set backspace=indent,eol,start
 set incsearch									"seacrch while you type
 set hlsearch									"highlight searches
+"set noswapfile
 set smartindent								"smart indent
 set tabstop=2									"number of spaces for tab
-set shiftwidth=2								"number of spaces auto indent
+set shiftwidth=2							"number of spaces auto indent
 set softtabstop=2
 set expandtab
 set ignorecase									"Case insensitive search
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
-"set cursorline 								"show cursor line
-"set cursorcolumn                       "show cursor column
 set mouse=""
-set nonumber
+set number
 set scrolloff=20
+set splitright
+set splitbelow
+set autowrite
 "set tw=80
 
 "hi CursorLine guibg=Grey40 gui=bold
 "hi CursorColumn guibg=Grey40
 
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+
+" Enter automatically into the files directory
+autocmd BufEnter * silent! lcd %:p:h
+
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " reselectp pastecape in insert mod content
 noremap gV `[v`]
@@ -214,6 +305,10 @@ nnoremap <cr> :nohlsearch<cr>
 
 "set markdown syntax for .md files
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
+"set gitconfig syntax for include files
+au BufNewFile,BufRead .gitconfig.*  set filetype=gitconfig
+
 "set spell check on markdown files
 au BufRead,BufNewFile *.md setlocal spell
 au BufRead,BufNewFile *.md setlocal tw=79
@@ -253,4 +348,3 @@ if has("autocmd")
       au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
           \| exe "normal! g'\"" | endif
 endif
-

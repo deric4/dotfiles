@@ -2,7 +2,7 @@
 
 #git
 echo "git: setting user email"
-git config --global user.email "deric.miguel@gmail.com"
+git config --global user.email "deric.miguel@pm.me"
 
 # vim
 echo "vim: linking files and installing vundle"
@@ -25,5 +25,3 @@ ln -sf `pwd`/zsh/zshrc ~/.zshrc
 # tmux
 echo "tmux: setting tmux conf"
 ln -sf `pwd`/tmux/tmux.conf ~/.tmux.conf
-
-

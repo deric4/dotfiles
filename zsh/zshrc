@@ -6,7 +6,7 @@ export TERM="xterm-256color"
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="cypher"
+ZSH_THEME="deric4"
 #ZSH_THEME="cordial"
 #ZSH_THEME="bira"
 #ZSH_THEME="blinks"
@@ -128,13 +128,15 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH=$PATH:/usr/local/mysql
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$GOPATH/bin
+# gpg-suite
+export PATH="/usr/local/MacGPG2/bin:$PATH"
 #export PATH=$PATH:/Users/deric/.sdkman/candidates
 
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
 # POWERLINE
 #. ${HOME}/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
-export POWERLINE_CONFIG_COMMAND=${HOME}/Library/Python/3.6/bin/powerline-config
+#export POWERLINE_CONFIG_COMMAND=${HOME}/Library/Python/3.6/bin/powerline-config
 #. ${HOME}/Library/Python/3.6/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -143,3 +145,6 @@ export POWERLINE_CONFIG_COMMAND=${HOME}/Library/Python/3.6/bin/powerline-config
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/Cellar/terraform/0.11.6/bin/terraform terraform
+
+eval "$(pyenv init -)"
+unalias grv
